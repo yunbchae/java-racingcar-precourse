@@ -4,7 +4,11 @@ public class Car {
 
     private final CarName name;
 
-    public Car(CarName name) {
+    private Car(CarName name) {
         this.name = name;
+    }
+
+    public static Car of(String carName) {
+        return new Car(new CarName(carName));
     }
 }
