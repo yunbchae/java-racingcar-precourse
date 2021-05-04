@@ -2,13 +2,17 @@ package domain;
 
 public class Position {
 
-    private int position;
+    private final int position;
 
     public Position(int startPosition) {
         this.position = startPosition;
     }
 
-    public void plus() {
-        this.position++;
+    public Position plus() {
+        return new Position(position + 1);
+    }
+
+    public int getPosition() {
+        return position;
     }
 }

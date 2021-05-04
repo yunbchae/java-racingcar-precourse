@@ -1,7 +1,6 @@
-package util;
+package controller;
 
 import domain.Car;
-import domain.CarName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -20,18 +19,17 @@ public class RacingReceptionistTest {
 
         // then
         assertThat(carList)
-                .extracting("name")
-                .usingFieldByFieldElementComparator()
-                .isEqualTo(mockCarNameList(inputString));
+                .usingRecursiveFieldByFieldElementComparator()
+                .isEqualTo(mockCarList(inputString));
     }
 
-    private List<CarName> mockCarNameList(String inputString) {
-        List<CarName> carNameList = new ArrayList<>();
+    private List<Car> mockCarList(String inputString) {
+        List<Car> carList = new ArrayList<>();
         String[] carNames = inputString.split(RacingReceptionist.CAR_NAMES_INPUT_DELIMITER);
         for (String carName : carNames) {
-            carNameList.add(new CarName(carName));
+            carList.add(Car.of(carName));
         }
-        return carNameList;
+        return carList;
     }
 
 }

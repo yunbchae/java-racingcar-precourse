@@ -28,8 +28,13 @@ public class CarTest {
     @ParameterizedTest(name = "전달받은 값이 4이상이면 전진한다.")
     @CsvSource(value = {"0:0", "3:0", "4:1", "9:1"}, delimiter = ':')
     public void goOrStopTest(int randomNumber, int expectedPosition) {
+        // given
         Car car = Car.of("car");
-        car.goOrStop(randomNumber);
+
+        // when
+        car.goOrNot(randomNumber);
+
+        // then
         assertThat(car)
                 .extracting("position")
                 .usingRecursiveComparison()

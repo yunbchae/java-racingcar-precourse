@@ -2,19 +2,29 @@ package domain;
 
 public class CarName {
 
-    public static final int MIN_NAME_LENGTH = 1;
-    public static final int MAX_NAME_LENGTH = 5;
+    private static final int MAX_NAME_LENGTH = 5;
 
     private final String name;
 
-    public CarName(String name) {
+    CarName(String name) {
+        validateEmptyName(name);
         validateCarNameLength(name);
         this.name = name;
     }
 
-    private void validateCarNameLength(String name) {
-        if (name == null || name.length() < MIN_NAME_LENGTH || name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
+    private void validateEmptyName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("자동차 이름이 비어있습니다.");
         }
+    }
+
+    private void validateCarNameLength(String name) {
+        if (name.length() > MAX_NAME_LENGTH) {
+            throw new IllegalArgumentException(String.format("자동차 이름은 %d자 이하만 가능합니다.", MAX_NAME_LENGTH));
+        }
+    }
+
+    public String getName() {
+        return name;
     }
 }

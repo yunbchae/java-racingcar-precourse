@@ -6,7 +6,7 @@ public class Car {
     public static final int GO_NUMBER_THRESHOLD = 4;
 
     private final CarName name;
-    private final Position position;
+    private Position position;
 
     private Car(CarName name) {
         this.name = name;
@@ -17,9 +17,17 @@ public class Car {
         return new Car(new CarName(carName));
     }
 
-    public void goOrStop(int randomNumber) {
+    public void goOrNot(int randomNumber) {
         if (randomNumber >= GO_NUMBER_THRESHOLD) {
-            position.plus();
+            position = position.plus();
         }
+    }
+
+    public CarName getName() {
+        return name;
+    }
+
+    public Position getPosition() {
+        return position;
     }
 }
