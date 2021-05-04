@@ -2,6 +2,7 @@ package controller;
 
 import domain.Cars;
 import domain.RaceReport;
+import domain.RaceResult;
 import view.InputView;
 import view.OutputView;
 
@@ -19,6 +20,8 @@ public class RacingGame {
             final List<RaceReport> raceReport = cars.race(randomGenerator);
             OutputView.print(raceReport);
         }
+        final RaceResult raceResult = cars.getResult();
+        OutputView.print(raceResult);
     }
 
 }

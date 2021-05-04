@@ -3,7 +3,6 @@ package domain;
 import controller.RandomGenerator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Cars {
@@ -11,7 +10,7 @@ public class Cars {
     private final List<Car> cars;
 
     public Cars(List<Car> carList) {
-        this.cars = Collections.unmodifiableList(carList);
+        this.cars = carList;
     }
 
     public List<RaceReport> race(RandomGenerator randomGenerator) {
@@ -23,4 +22,19 @@ public class Cars {
         return raceReports;
     }
 
+    public RaceResult getResult() {
+        cars.sort(Car::compareTo);
+        int max = cars.get(0).getPosition().getPosition();
+        List<CarName> carNameList = new ArrayList<>();
+        for (Car car : cars) {
+            addWinners(max, carNameList, car);
+        }
+        return new RaceResult(carNameList);
+    }
+
+    private void addWinners(int max, List<CarName> carNameList, Car car) {
+        if (car.getPosition().getPosition() == max) {
+            carNameList.add(car.getName());
+        }
+    }
 }

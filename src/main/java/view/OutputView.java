@@ -1,6 +1,7 @@
 package view;
 
 import domain.RaceReport;
+import domain.RaceResult;
 
 import java.util.List;
 
@@ -11,5 +12,9 @@ public class OutputView {
             System.out.println(raceReport.render());
         }
         System.out.println();
+    }
+
+    public static void print(RaceResult raceResult) {
+        System.out.println(raceResult.render());
     }
 }
