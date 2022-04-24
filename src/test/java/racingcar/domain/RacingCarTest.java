@@ -28,8 +28,7 @@ class RacingCarTest {
         @MethodSource("racingcar.domain.RacingCarTest#provideCreateFailTestArguments")
         void createFailTest(final RacingCarName name, final RacingCarPosition position) {
             assertThatIllegalArgumentException()
-                    .isThrownBy(() -> new RacingCar(name, position))
-                    .withMessageContaining(String.valueOf(name), position);
+                    .isThrownBy(() -> new RacingCar(name, position));
         }
     }
 
