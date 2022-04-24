@@ -4,7 +4,7 @@ import racingcar.util.Assert;
 
 import java.util.Objects;
 
-public class RacingCarPosition {
+public class RacingCarPosition implements Comparable<RacingCarPosition> {
 
     private static final int STARTING_LINE_POSITION = 0;
 
@@ -27,8 +27,12 @@ public class RacingCarPosition {
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof RacingCarPosition)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof RacingCarPosition)) {
+            return false;
+        }
         final RacingCarPosition that = (RacingCarPosition) o;
         return position == that.position;
     }
@@ -36,5 +40,10 @@ public class RacingCarPosition {
     @Override
     public int hashCode() {
         return Objects.hash(position);
+    }
+
+    @Override
+    public int compareTo(final RacingCarPosition other) {
+        return Integer.compare(this.position, other.position);
     }
 }

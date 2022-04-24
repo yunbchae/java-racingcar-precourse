@@ -9,8 +9,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.*;
 
 class RacingCarsTest {
 
@@ -22,14 +21,14 @@ class RacingCarsTest {
         @Test
         void createSuccessTest() {
             assertThatNoException()
-                    .isThrownBy(() -> new RacingCars(Arrays.asList("aaa", "bbb", "ccc")));
+                    .isThrownBy(() -> RacingCars.of(Arrays.asList("aaa", "bbb", "ccc")));
         }
 
         @DisplayName("중복된 이름으로 RacingCars 생성 시, IllegalArgumentException 예외가 발생한다.")
         @Test
         void duplicateNameTest() {
             assertThatIllegalArgumentException()
-                    .isThrownBy(() -> new RacingCars(Arrays.asList("aaa", "aaa")))
+                    .isThrownBy(() -> RacingCars.of(Arrays.asList("aaa", "aaa")))
                     .withMessageContaining("aaa");
         }
 
@@ -37,8 +36,28 @@ class RacingCarsTest {
         @NullAndEmptySource
         void nullAndEmptyListTest(final List<String> carNameList) {
             assertThatIllegalArgumentException()
-                    .isThrownBy(() -> new RacingCars(carNameList))
+                    .isThrownBy(() -> RacingCars.of(carNameList))
                     .withMessageContaining(String.valueOf(carNameList));
+        }
+    }
+
+    @DisplayName("우승자 테스트")
+    @Nested
+    class GetWinnersTest {
+
+        @DisplayName("가장 많이 전진한 자동차가 우승한다.")
+        @Test
+        void getWinnersTest() {
+            final RacingCar winner1 = new RacingCar(new RacingCarName("aaa"), new RacingCarPosition(3));
+            final RacingCar winner2 = new RacingCar(new RacingCarName("bbb"), new RacingCarPosition(3));
+            final RacingCar looser1 = new RacingCar(new RacingCarName("ccc"), new RacingCarPosition(2));
+            final RacingCar looser2 = new RacingCar(new RacingCarName("ddd"), new RacingCarPosition(1));
+            final RacingCars racingCars = new RacingCars(Arrays.asList(winner1, winner2, looser1, looser2));
+
+            final List<RacingCar> winners = racingCars.getWinners();
+
+            assertThat(winners)
+                    .containsExactly(winner1, winner2);
         }
     }
 

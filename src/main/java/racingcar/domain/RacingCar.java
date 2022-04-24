@@ -2,7 +2,9 @@ package racingcar.domain;
 
 import racingcar.util.Assert;
 
-public class RacingCar {
+import java.util.Objects;
+
+public class RacingCar implements Comparable<RacingCar> {
 
     private final RacingCarName name;
     private final RacingCarPosition position;
@@ -25,5 +27,14 @@ public class RacingCar {
         if (moveCondition.isSatisfied()) {
             position.move();
         }
+    }
+
+    public boolean isAtSamePosition(final RacingCar other) {
+        return Objects.equals(this.position, other.position);
+    }
+
+    @Override
+    public int compareTo(final RacingCar other) {
+        return Objects.compare(this.position, other.position, RacingCarPosition::compareTo);
     }
 }
