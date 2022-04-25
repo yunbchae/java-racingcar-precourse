@@ -18,35 +18,40 @@ public class RacingGame {
     private final InputView inputView;
     private final OutputView outputView;
 
+    private RacingCars racingCars;
+    private MoveCounter moveCounter;
+
     public RacingGame(final InputView inputView, final OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
 
     public void run() {
-        final RacingCars racingCars = inputRacingCars();
-        final MoveCounter moveCounter = inputMoveCount();
+        while (racingCars == null) {
+            initRacingCars();
+        }
+        while (moveCounter == null) {
+            inputMoveCounter();
+        }
         moveCounter.forEach(() -> race(racingCars));
         outputView.print(new WinnerOutput(racingCars.getWinners()));
     }
 
-    private RacingCars inputRacingCars() {
+    private void initRacingCars() {
         try {
             outputView.printInputCarNamesMessage();
-            return RacingCars.of(inputView.readRacingCarNames());
+            racingCars = RacingCars.of(inputView.readRacingCarNames());
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
-            return inputRacingCars();
         }
     }
 
-    private MoveCounter inputMoveCount() {
+    private void inputMoveCounter() {
         try {
             outputView.printInputMoveCountMessage();
-            return new MoveCounter(inputView.readMoveCount());
+            moveCounter = new MoveCounter(inputView.readMoveCount());
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
-            return inputMoveCount();
         }
     }
 
