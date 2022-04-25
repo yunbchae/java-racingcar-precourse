@@ -18,4 +18,9 @@ public class InputView {
         final String input = inputSupplier.get();
         return Arrays.asList(input.split(RACING_CAR_NAME_INPUT_DELIMITER));
     }
+
+    public int readMoveCount() {
+        final String input = inputSupplier.get();
+        return Integer.parseInt(input);
+    }
 }

@@ -4,6 +4,7 @@ import racingcar.util.Assert;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static racingcar.util.ListUtils.filter;
 import static racingcar.util.ListUtils.map;
@@ -29,4 +30,9 @@ public class RacingCars {
         return Collections.unmodifiableList(winners);
     }
 
+    public void race(final Supplier<MoveCondition> moveConditionSupplier) {
+        for (RacingCar racingCar : racingCarList) {
+            racingCar.move(moveConditionSupplier.get());
+        }
+    }
 }
