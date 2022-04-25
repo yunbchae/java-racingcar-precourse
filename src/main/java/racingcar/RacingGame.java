@@ -25,9 +25,29 @@ public class RacingGame {
 
     public void run() {
         final RacingCars racingCars = inputRacingCars();
-        final MoveCounter moveCounter = new MoveCounter(inputMoveCount());
+        final MoveCounter moveCounter = inputMoveCount();
         moveCounter.forEach(() -> race(racingCars));
         outputView.print(new WinnerOutput(racingCars.getWinners()));
+    }
+
+    private RacingCars inputRacingCars() {
+        try {
+            outputView.printInputCarNamesMessage();
+            return RacingCars.of(inputView.readRacingCarNames());
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            return inputRacingCars();
+        }
+    }
+
+    private MoveCounter inputMoveCount() {
+        try {
+            outputView.printInputMoveCountMessage();
+            return new MoveCounter(inputView.readMoveCount());
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+            return inputMoveCount();
+        }
     }
 
     private void race(final RacingCars racingCars) {
@@ -38,15 +58,5 @@ public class RacingGame {
     private MoveCondition generateMoveCondition() {
         final int randomNumber = Randoms.pickNumberInRange(MINIMUM_RANDOM_NUMBER, MAXIMUM_RANDOM_NUMBER);
         return new NumberComparingMoveCondition(randomNumber);
-    }
-
-    private RacingCars inputRacingCars() {
-        outputView.printInputCarNamesMessage();
-        return RacingCars.of(inputView.readRacingCarNames());
-    }
-
-    private int inputMoveCount() {
-        outputView.printInputMoveCountMessage();
-        return inputView.readMoveCount();
     }
 }

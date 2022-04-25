@@ -15,12 +15,20 @@ public class InputView {
     }
 
     public List<String> readRacingCarNames() {
-        final String input = inputSupplier.get();
-        return Arrays.asList(input.split(RACING_CAR_NAME_INPUT_DELIMITER));
+        try {
+            final String input = inputSupplier.get();
+            return Arrays.asList(input.split(RACING_CAR_NAME_INPUT_DELIMITER));
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     public int readMoveCount() {
-        final String input = inputSupplier.get();
-        return Integer.parseInt(input);
+        try {
+            final String input = inputSupplier.get();
+            return Integer.parseInt(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }

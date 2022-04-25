@@ -28,4 +28,8 @@ public class OutputView {
     public void print(final WinnerOutput winnerOutput) {
         outputConsumer.accept(String.format("최종 우승자: %s", winnerOutput.getWinners()));
     }
+
+    public void printError(final String message) {
+        outputConsumer.accept(String.format("[ERROR] %s", message));
+    }
 }
