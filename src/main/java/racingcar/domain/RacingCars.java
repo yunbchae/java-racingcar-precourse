@@ -35,4 +35,8 @@ public class RacingCars {
             racingCar.move(moveConditionSupplier.get());
         }
     }
+
+    public List<RacingCar> getRacingCarList() {
+        return racingCarList;
+    }
 }

@@ -37,4 +37,12 @@ public class RacingCar implements Comparable<RacingCar> {
     public int compareTo(final RacingCar other) {
         return Objects.compare(this.position, other.position, RacingCarPosition::compareTo);
     }
+
+    public String getName() {
+        return name.getName();
+    }
+
+    public int getPosition() {
+        return position.getPosition();
+    }
 }

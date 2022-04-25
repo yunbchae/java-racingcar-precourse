@@ -17,4 +17,7 @@ public class RacingCarName {
         this.name = name.trim();
     }
 
+    public String getName() {
+        return name;
+    }
 }

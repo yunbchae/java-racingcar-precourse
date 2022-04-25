@@ -1,5 +1,7 @@
 package racingcar.view;
 
+import racingcar.dto.RaceResultOutput;
+
 import java.util.function.Consumer;
 
 public class OutputView {
@@ -16,5 +18,9 @@ public class OutputView {
 
     public void printInputMoveCountMessage() {
         outputConsumer.accept("시도할 회수는 몇 회인가요? ");
+    }
+
+    public void print(final RaceResultOutput raceResultOutput) {
+        outputConsumer.accept(raceResultOutput.getRaceResult());
     }
 }

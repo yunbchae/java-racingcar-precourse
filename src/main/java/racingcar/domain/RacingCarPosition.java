@@ -46,4 +46,8 @@ public class RacingCarPosition implements Comparable<RacingCarPosition> {
     public int compareTo(final RacingCarPosition other) {
         return Integer.compare(this.position, other.position);
     }
+
+    public int getPosition() {
+        return position;
+    }
 }

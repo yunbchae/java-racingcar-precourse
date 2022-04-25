@@ -5,6 +5,7 @@ import racingcar.domain.MoveCondition;
 import racingcar.domain.MoveCounter;
 import racingcar.domain.NumberComparingMoveCondition;
 import racingcar.domain.RacingCars;
+import racingcar.dto.RaceResultOutput;
 import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
@@ -24,7 +25,13 @@ public class RacingGame {
     public void run() {
         final RacingCars racingCars = inputRacingCars();
         final MoveCounter moveCounter = new MoveCounter(inputMoveCount());
-        moveCounter.forEach(() -> racingCars.race(this::generateMoveCondition));
+        moveCounter.forEach(() -> race(racingCars));
+    }
+
+    private void race(final RacingCars racingCars) {
+        racingCars.race(this::generateMoveCondition);
+        final RaceResultOutput raceResultOutput = new RaceResultOutput(racingCars.getRacingCarList());
+        outputView.print(raceResultOutput);
     }
 
     private MoveCondition generateMoveCondition() {
