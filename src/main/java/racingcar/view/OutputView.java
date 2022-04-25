@@ -1,6 +1,7 @@
 package racingcar.view;
 
 import racingcar.dto.RaceResultOutput;
+import racingcar.dto.WinnerOutput;
 
 import java.util.function.Consumer;
 
@@ -22,5 +23,9 @@ public class OutputView {
 
     public void print(final RaceResultOutput raceResultOutput) {
         outputConsumer.accept(raceResultOutput.getRaceResult());
+    }
+
+    public void print(final WinnerOutput winnerOutput) {
+        outputConsumer.accept(String.format("최종 우승자: %s", winnerOutput.getWinners()));
     }
 }
